@@ -1,0 +1,55 @@
+[System]
+Name='try'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=2
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='left sensor'
+Range=[0.1 1]
+NumMFs=3
+MF1='too close':'trapmf',[-2 -1 0.15 0.2]
+MF2='close':'trapmf',[0.1 0.2 0.6 0.7]
+MF3='near':'trapmf',[0.6 0.7 2 3]
+
+[Input2]
+Name='right sensor'
+Range=[0.1 1]
+NumMFs=3
+MF1='too close':'trapmf',[-2 -1 0.25 0.3]
+MF2='close':'trapmf',[0.2 0.3 0.7 0.8]
+MF3='near':'trapmf',[0.7 0.8 2 3]
+
+[Output1]
+Name='motor left'
+Range=[-10 10]
+NumMFs=3
+MF1='rev':'trapmf',[-20 -11 -6 0]
+MF2='off':'trimf',[-2 0 2]
+MF3='fwd':'trapmf',[0 6 11 20]
+
+[Output2]
+Name='motor right'
+Range=[-10 10]
+NumMFs=3
+MF1='rev':'trapmf',[-20 -11 -6 0]
+MF2='off':'trimf',[-2 0 2]
+MF3='fwd':'trapmf',[0 6 11 20]
+
+[Rules]
+3 3, 3 3 (1) : 1
+3 2, 2 3 (1) : 1
+3 1, 1 3 (1) : 1
+2 3, 3 2 (1) : 1
+2 1, 1 3 (1) : 1
+1 3, 3 1 (1) : 1
+1 2, 3 1 (1) : 1
+1 1, 1 1 (1) : 1
+2 2, 1 1 (1) : 1
